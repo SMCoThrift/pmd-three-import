@@ -7,7 +7,7 @@ if( empty( $taxonomy ) )
 if( ! taxonomy_exists( $taxonomy ) )
   WP_CLI::error( '🚨 No taxonomy found for `' . $taxonomy . '`!');
 
-$filename = $taxonomy . '.csv';
+$filename = trailingslashit( dirname( __FILE__ ) ) . 'imports/' . $taxonomy . '.csv';
 if( ! file_exists( $filename ) )
   WP_CLI::error( '🚨 File `' . $filename . '` not found!' );
 
