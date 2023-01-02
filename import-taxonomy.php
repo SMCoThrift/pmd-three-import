@@ -31,9 +31,10 @@ if( ( $fp = fopen( $filename, 'r' ) ) !== FALSE ){
   endwhile;
   fclose( $fp );
 }
+WP_CLI::line( '👉 Importing `' . $taxonomy . '` taxonomy.' );
 
 //WP_CLI::success( '👉 $rows = ' . print_r( $rows, true ) );
-
+$counter = 2;
 if( $rows && is_array( $rows ) && 0 < count( $rows ) ):
   foreach( $rows as $key => $row ){
     if( 0 === $key ){
@@ -66,12 +67,11 @@ if( $rows && is_array( $rows ) && 0 < count( $rows ) ):
             $success = update_field( $key, $value, $field_id );
             WP_CLI::line( "👉 update_field( $key, $value, $field_id ) = $success" );
           }
-
-          //WP_CLI::error('🚨 halting...');
         }
       } else {
-        WP_CLI::line( '🚨 ' . $row['taxonomy'] . ' ' . $row['name'] . ' exists. Skipping...' );
+        WP_CLI::line( '🚨 ' . $counter . '. `' . $row['name'] . '` exists. Skipping...' );
       }
+      $counter++;
     }
 
   }
