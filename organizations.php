@@ -154,7 +154,7 @@ foreach( $rows as $key => $org ){
     }
 
     /**
-     * CONTINUE WORKING HERE:
+     * Taxonomy import:
      */
     $csv_to_taxonomy_mappings = [
       'pickup_locations' => 'pickup_location',
