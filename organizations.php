@@ -114,6 +114,12 @@ foreach( $rows as $key => $org ){
           case 'realtor_ad_medium_banner':
           case 'realtor_ad_link':
           case 'realtor_description':
+            /**
+             * We don't process these CSV columns here because they get
+             * processed below under the `pickup_settings` switch which
+             * is handling the $meta_value array which we will feed to
+             * the update_field() call for the parent ACF Group field.
+             */
             // nothing
             break;
 
