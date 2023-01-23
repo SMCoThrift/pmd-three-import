@@ -1,4 +1,5 @@
 <?php
+require_once( trailingslashit( dirname( __FILE__ ) ) . 'utilities.php' );
 $sep = str_repeat('-', 60 );
 
 $dry_run = ( isset( $args[0] ) && in_array( $args[0], [ 'true', 'false' ] ) )? filter_var( $args[0], FILTER_VALIDATE_BOOL ) : true ;
@@ -21,6 +22,12 @@ if( ! is_array( $config ) )
   $config = [];
 if( ! array_key_exists( 'last_row', $config ) )
   $config['last_row'] = 0;
+
+$reset = ( isset( $args[2] ) && in_array( $args[2], [ 'true', 'false' ] ) )? filter_var( $args[2], FILTER_VALIDATE_BOOL ) : false ;
+if( $reset ){
+  WP_CLI::line( $sep . "\n⚙️  \$reset is ON. Setting `last_row` to `0`" . "\n" . $sep );
+  $config['last_row'] = 0;
+}
 
 $row = 0;
 $rows = [];
@@ -48,7 +55,7 @@ foreach( $rows as $key => $store ){
   if( $counter >= $limit )
     break;
 
-  $exists = post_exists( $store['post_title'], null, null, 'store' );
+  $exists = post_exists_by_slug( $store['post_name'], 'store' );
   if( $exists ){
     WP_CLI::line( '🟥 `' . $store['post_title'] . '` exists. Skipping...' );
   } else {
