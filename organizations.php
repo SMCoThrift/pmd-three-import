@@ -1,4 +1,5 @@
 <?php
+require_once( trailingslashit( dirname( __FILE__ ) ) . 'attachments.php' );
 $sep = str_repeat('-', 60 );
 
 $dry_run = ( isset( $args[0] ) && in_array( $args[0], [ 'true', 'false' ] ) )? filter_var( $args[0], FILTER_VALIDATE_BOOL ) : true ;
@@ -69,6 +70,11 @@ foreach( $rows as $key => $org ){
       // nothing
     } else {
       $ID = wp_insert_post( $post_args );
+    }
+
+    if( ! empty( $org['post_thumbnail'] ) ){
+      $attachment_id = pmd_import_attachment( $org['post_thumbnail'] );
+      set_post_thumbnail( $ID, $attachment_id );
     }
 
     $csv_to_meta_field_mapping = [
@@ -175,7 +181,7 @@ foreach( $rows as $key => $org ){
       } else {
         $slugs = ( stristr( $org[ $csv_key ], ',' ) )? explode( ',', $org[ $csv_key ] ) : [] ;
         if( 0 < count( $slugs ) ){
-          WP_CLI::line( $org['post_title'] . ' 👉 ' . $taxonomy . ' 👉 ' . print_r( $slugs, true ) );
+          WP_CLI::line( 'Importing `' . $org['post_title'] . '` 👉 ' . $taxonomy . 's 👉 ' . implode(', ', $slugs ) );
           wp_set_object_terms( $ID, $slugs, $taxonomy );
         }
       }
