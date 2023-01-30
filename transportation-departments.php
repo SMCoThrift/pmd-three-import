@@ -1,4 +1,5 @@
 <?php
+require_once( trailingslashit( dirname( __FILE__ ) ) . 'attachments.php' );
 $sep = str_repeat('-', 60 );
 
 $dry_run = ( isset( $args[0] ) && in_array( $args[0], [ 'true', 'false' ] ) )? filter_var( $args[0], FILTER_VALIDATE_BOOL ) : true ;
@@ -165,7 +166,7 @@ foreach( $rows as $key => $trans_dept ){
       } else {
         $slugs = ( stristr( $trans_dept[ $csv_key ], ',' ) )? explode( ',', $trans_dept[ $csv_key ] ) : [] ;
         if( 0 < count( $slugs ) ){
-          WP_CLI::line( $org['post_title'] . ' 👉 ' . $taxonomy . ' 👉 ' . print_r( $slugs, true ) );
+          WP_CLI::line( $trans_dept['post_title'] . ' 👉 ' . $taxonomy . ' 👉 ' . print_r( $slugs, true ) );
           wp_set_object_terms( $ID, $slugs, $taxonomy );
         }
       }
