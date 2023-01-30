@@ -72,7 +72,7 @@ foreach( $rows as $key => $org ){
       $ID = wp_insert_post( $post_args );
     }
 
-    if( ! empty( $org['post_thumbnail'] ) ){
+    if( ! $dry_run && ! empty( $org['post_thumbnail'] ) ){
       $attachment_id = pmd_import_attachment( $org['post_thumbnail'] );
       set_post_thumbnail( $ID, $attachment_id );
     }
