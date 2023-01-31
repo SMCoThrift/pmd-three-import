@@ -73,7 +73,7 @@ foreach( $rows as $key => $store ){
     }
 
     $transDeptObj = get_page_by_title( $store['trans_dept'], OBJECT, 'trans_dept' );
-    $trans_dept_id = $transDeptObj->ID;
+    $trans_dept_id = ( ! is_null( $transDeptObj ) )? $transDeptObj->ID : '' ;
 
     $csv_to_meta_field_mapping = [
       'trans_dept'        => [ 'name' => 'trans_dept', 'key' => 'field_62a0a8a24da3b' ],

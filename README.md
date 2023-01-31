@@ -4,6 +4,10 @@ Imports PMD 3.0 data.
 
 ## Changelog
 
+### 1.0.3
+
+- Checking for `$transDeptObj` when attempting to set `$trans_dept_id` in stores.php.
+
 ### 1.0.2
 
 - BUGFIX: Requiring `pmd_import_attachment()` inside `transportation-departments.php`.
