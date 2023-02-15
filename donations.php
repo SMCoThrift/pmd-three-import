@@ -43,7 +43,7 @@ foreach( $rows as $key => $donation ){
   } else {
     WP_CLI::line( '✅ ' . ( $key ) . '. `' . $donation['post_title'] . '`' );
     $post_date = date( 'Y-m-d H:i:s', strtotime( $donation['post_date'] ) );
-    WP_CLI::line( '🗓 $post_date = ' . $post_date . "\n👉 \$donation[post_date] = " . $donation['post_date'] );
+    //WP_CLI::line( '🗓 $post_date = ' . $post_date . "\n👉 \$donation[post_date] = " . $donation['post_date'] );
     $post_args = [
       'post_type'     => 'donation',
       'post_title'    => $donation['post_title'],
