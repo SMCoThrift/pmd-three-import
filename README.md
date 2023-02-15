@@ -4,6 +4,10 @@ Imports PMD 3.0 data.
 
 ## Changelog
 
+### 1.1.1
+
+- Checking for `$donation` variable `is_array` and `array_key_exists()`.
+
 ### 1.1.0
 
 - Donations import.

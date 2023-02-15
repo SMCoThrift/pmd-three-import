@@ -34,7 +34,7 @@ if( ( $fp = fopen( $file, 'r' ) ) !== FALSE ):
 endif;
 
 foreach( $rows as $key => $donation ){
-  if( '' == $donation['post_name'] )
+  if( ! is_array( $donation ) || ! array_key_exists( 'post_name', $donation ) || '' == $donation['post_name'] )
     continue;
 
   $exists = post_exists_by_slug( $donation['post_name'], 'donation' );
