@@ -4,6 +4,10 @@ Imports PMD 3.0 data.
 
 ## Changelog
 
+### 1.1.0
+
+- Donations import.
+
 ### 1.0.3
 
 - Checking for `$transDeptObj` when attempting to set `$trans_dept_id` in stores.php.
