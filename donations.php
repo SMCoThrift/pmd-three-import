@@ -10,6 +10,8 @@ if( $dry_run ){
 }
 
 $filename = $args[1];
+if( empty( $filename ) )
+  WP_CLI::error( '🚨 Filename empty! Please enter a CSV file of donations as the 2nd positional argument.' );
 
 $file = trailingslashit( dirname( __FILE__ ) ) . 'imports/' . $filename;
 if( ! file_exists( $file ) )
