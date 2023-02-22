@@ -4,6 +4,10 @@ Imports PMD 3.0 data.
 
 ## Changelog
 
+### 1.3.0
+
+- Adding `start_date` option to Orphaned Donation import.
+
 ### 1.2.0
 
 - Adding Orphaned Donation import.

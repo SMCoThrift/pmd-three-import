@@ -5,7 +5,16 @@ use function DonationManager\donations\{add_orphaned_donation,orphaned_donation_
 use function DonationManager\orphanedproviders\{get_orphaned_provider_contact,get_orphaned_donation_contacts};
 
 $default_org = get_default_organization();
-//WP_CLI::line( '🔔 $default_org = ' . print_r( $default_org, true ) );
+
+$start_date = $args[0];
+if( ! empty( $start_date ) ){
+  //WP_CLI::error( '🚨 Please provide a start_date in YYYY-MM-DD format as the first argument when calling this file.' );
+  if( ! stristr( $start_date, '-' ) )
+    WP_CLI::error( '🚨  start_date must be in YYYY-MM-DD format.' );
+  $start_date_array = explode( '-', $start_date );
+  if( 3 != count( $start_date_array ) )
+    WP_CLI::error( '🚨  start_date must be in YYYY-MM-DD format.' );
+}
 
 $query_args = [
   'post_type'   => 'donation',
@@ -17,6 +26,13 @@ $query_args = [
   'orderby'     => 'date',
   'order'       => 'ASC',
 ];
+
+if( ! empty( $start_date ) ){
+  $query_args['date_query'] = [
+    'after'     => $start_date,
+    'inclusive' => true,
+  ];
+}
 
 $orphaned_pickup_radius = get_field( 'orphaned_pickup_radius', 'option' );
 $radius = ( is_numeric( $orphaned_pickup_radius ) )? $orphaned_pickup_radius : 15 ;
