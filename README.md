@@ -4,6 +4,10 @@ Imports PMD 3.0 data.
 
 ## Changelog
 
+### 1.4.1
+
+- Adding additional fields for donation import, including all donor data.
+
 ### 1.4.0
 
 - Adding by-pass link generator.

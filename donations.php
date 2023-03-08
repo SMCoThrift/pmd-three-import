@@ -41,7 +41,21 @@ foreach( $rows as $key => $donation ){
 
   $exists = post_exists_by_slug( $donation['post_name'], 'donation' );
   if( $exists ){
-    WP_CLI::line( '🟥 `' . $donation['post_title'] . '` exists. Skipping...' );
+    $donation_id = $exists;
+    WP_CLI::line( '👉 Donation #' . $donation_id . ' `' . $donation['post_title'] . '` exists. Updating...' );
+
+    // Donor Info
+    update_field( 'field_629f706dabec9', [ 'name' => $donation['donor_name'] ], $donation_id );
+    update_field( 'field_629f706dabec9', [ 'email' => $donation['donor_email'] ], $donation_id );
+    update_field( 'field_629f706dabec9', [ 'phone' => $donation['donor_phone'] ], $donation_id );
+    // Address
+    update_field( 'field_6320887a3c4b3', [ 'company' => $donation['donor_company'] ], $donation_id );
+    update_field( 'field_6320887a3c4b3', [ 'street' => $donation['donor_address'] ], $donation_id );
+    update_field( 'field_6320887a3c4b3', [ 'city' => $donation['donor_city'] ], $donation_id );
+    update_field( 'field_6320887a3c4b3', [ 'state' => $donation['donor_state'] ], $donation_id );
+    update_field( 'field_6320887a3c4b3', [ 'zip' => $donation['donor_zip'] ], $donation_id );
+    // Referrer
+    update_field( 'field_629f71e08b995', $donation['referrer'], $donation_id );
   } else {
     WP_CLI::line( '✅ ' . ( $key ) . '. `' . $donation['post_title'] . '`' );
     $post_date = date( 'Y-m-d H:i:s', strtotime( $donation['post_date'] ) );
