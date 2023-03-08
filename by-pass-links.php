@@ -17,7 +17,7 @@ $column_headings = [
   1   => 'post_name',
   2   => 'organization',
   3   => 'by-pass',
-  4   => 'old_permalink',
+  4   => 'new_permalink',
 ];
 $data[ $counter ] = $column_headings;
 $counter++;
